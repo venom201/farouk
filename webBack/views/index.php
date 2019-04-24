@@ -6,7 +6,11 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 -->
 <?php
 include '../config.php';
+session_start();
+if($_SESSION['m'] && $_SESSION['l'] && $_SESSION['r']=='admin')
+{
 $db=config::getconnexion();
+
 $sth = $db->query("SELECT * FROM users WHERE role='user'");
 $count = $sth->rowCount();
 $stha= $db->query("SELECT * FROM users WHERE role='admin'");
@@ -207,9 +211,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<li class="dropdown profile_details_drop">
 										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 											<div class="profile_img">	
-												<span class="prfil-img"><img src="images/in4.jpg" alt=""> </span> 
+												<span class="prfil-img"><img src="images/Farouk.jpg" alt=""> </span> 
 												<div class="user-name">
-													<p>Malorum</p>
+													<p>Farouk</p>
 													<span>Administrator</span>
 												</div>
 												<i class="fa fa-angle-down"></i>
@@ -220,7 +224,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										<ul class="dropdown-menu drp-mnu">
 											<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
 											<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li> 
-											<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+											<li> <form method="post" action="../core/disconnect.php">
+						<button type="submit" name="disconnect">Disconnect</button> 
+					  	
+						</form> </li>
 										</ul>
 									</li>
 								</ul>
@@ -732,3 +739,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</script>
 </body>
 </html>
+<?php
+}
+else
+	header('Location: http://localhost/webBack/views/errorpage.php');
+?>

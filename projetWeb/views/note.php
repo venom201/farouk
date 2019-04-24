@@ -4,12 +4,20 @@ $db=config::getconnexion();
 session_start();
 $a=$_SESSION['n'];
 echo $a;
-$req="SELECT * FROM `reservations` WHERE `reservations`.`id_client`='$a'";
+$req="SELECT s.id, s.nom, s.prenom, SUM(e.stat) total 
+FROM serveurs s LEFT JOIN eval e 
+ON s.id = e.id_serveur 
+
+GROUP BY s.id";
 $list=$db->query($req);
 
 
 $req2="SELECT * FROM `serveurs`";
 $listeS=$db->query($req2);
+
+$req3="SELECT * FROM `eval`";
+$evalT=$db->query($req3);
+$count=$evalT->rowCount();
 
 ?>
 <!--
@@ -104,24 +112,24 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 							<tr>
 								<th>Nom</th>
 								<th>Prenom</th>
-								<th>Note</th>
+								<th>Pourcentage de Succés</th>
 							</tr>
 						</thead>
 						
 						
 														<?php 
-								foreach ($listeS as $row) {
+								foreach ($list as $row) {
 								echo'<tr>' ;
 								echo'<td>'.$row['nom'].'</td>';
 								echo'<td>'.$row['prenom'].'</td>';
-
+								echo'<td>'.round($row['total']*100/$count,2),"%".'</td>';
 								$id_serv = $row['id'];
 								?>
 						<form action="../core/like.php" method="POST">
 						
-						<td> <input type="hidden" value="<?php echo $id_serv ?>" name="id_serv" id="id_serv" > </td>
-						<td>  <button class="btn btn-success" name="likeBTN"> Like <span class="glyphicon glyphicon-thumbs-up"></span></button>
-						 <button class="btn btn-danger" name="dislikeBTN">Dislike <span class="glyphicon glyphicon-thumbs-down"></span></button> </td>
+					    <input type="hidden" value="<?php echo $id_serv ?>" name="id_serv" id="id_serv" > 
+						<td>  <button class="btn btn-success" name="likeBTN"><span class="glyphicon glyphicon-thumbs-up"></span></button>
+						 <button class="btn btn-danger" name="dislikeBTN"><span class="glyphicon glyphicon-thumbs-down"></span></button> </td>
 
 						</form>
 								<?php

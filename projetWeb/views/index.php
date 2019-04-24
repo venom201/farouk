@@ -46,7 +46,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 					<div class="toggle"> 
 						<ul class="toggle-menu">
 							<li><a href="index.php" class="active"><i class="fa fa-home"></i><span>Acceuil</span></a></li>
-							<li><a href="about.html"> About</a></li> 
+							<li><a href="../../web1/views/front/index.php">Events</a></li> 
 							<li><a href="gallery.html"> Gallery</a></li> 
 							<li><a href="codes.html"> Short Codes</a></li>
 							<li id="menu-academico" ><a class="active" href="../../webBack/views/index.php"><i class="fa fa-users"></i> <span>Utilisateurs</span> <span"></span><div class="clearfix"></div></a>
@@ -145,7 +145,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 									    <option selected>Choisir...</option>
 									    <option value="1">1 Personne</option>
 									    <option value="2">2 Personnes</option>
-									    <option value="3">Plus...</option>
+									    <option value="3">3 Personnes</option>
+									    <option value="4">Plus...</option>
 									  </select>
 							</div>
 							

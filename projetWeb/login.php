@@ -14,21 +14,58 @@ include "config.php";
 		$d=$row['id'];
 	}
 	if($a==$nom && $b==$mdp && $c=="admin")
-	{
-	
-		session_start();
-		$_SESSION['l']=$row['nom'];
-		$_SESSION['m']=$row['mdp'];
-		$_SESSION['r']=$c;
-		$_SESSION['n']=$d;
-		?>
-			<script type="text/javascript">
-				alert("Bienvenue Admin");
-				window.location="http://localhost/webBack/views/index.php";
-			</script>
-		<?php
-		/*header('Location: /template1/templines.rocks/html/shoptime-html/furni/view/Admin_Pannel/wrappixel.com/demos/admin-templates/admin-wrap/main/index2.html');*/
-	}
+		{
+			if ($a=="ghada")
+				
+				{
+				
+					session_start();
+					$_SESSION['l']=$row['nom'];
+					$_SESSION['m']=$row['mdp'];
+					$_SESSION['r']=$c;
+					$_SESSION['n']=$d;
+					?>
+						<script type="text/javascript">
+							alert("Bienvenue Admin Ghada");
+							window.location="http://localhost/web1/views/afficherpromotions.php";
+						</script>
+					<?php
+				}
+			else if ($a=="farouk")
+				
+				{
+				
+					session_start();
+					$_SESSION['l']=$row['nom'];
+					$_SESSION['m']=$row['mdp'];
+					$_SESSION['r']=$c;
+					$_SESSION['n']=$d;
+					?>
+						<script type="text/javascript">
+							alert("Bienvenue Admin Farouk");
+							window.location="http://localhost/webBack/views/index.php";
+						</script>
+					<?php
+					/*header('Location: /template1/templines.rocks/html/shoptime-html/furni/view/Admin_Pannel/wrappixel.com/demos/admin-templates/admin-wrap/main/index2.html');*/
+				}
+			else if ($a=="soreilla")
+				
+				{
+				
+					session_start();
+					$_SESSION['l']=$row['nom'];
+					$_SESSION['m']=$row['mdp'];
+					$_SESSION['r']=$c;
+					$_SESSION['n']=$d;
+					?>
+						<script type="text/javascript">
+							alert("Bienvenue Admin Soreilla");
+							window.location="http://localhost/projet2A_WEB/views/back/avis.php";
+						</script>
+					<?php
+					/*header('Location: /template1/templines.rocks/html/shoptime-html/furni/view/Admin_Pannel/wrappixel.com/demos/admin-templates/admin-wrap/main/index2.html');*/
+				}	
+		}	
 	else if ($a==$nom && $b==$mdp && $c!="admin")
 		{
 			session_start();

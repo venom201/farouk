@@ -14,6 +14,12 @@ if(isset($_POST['nom']) and isset($_POST['numero']) and isset($_POST['email']) a
 	$reservation= new reservation($v2,$v1,$v3,$v5,$v4,$v6,$v7);
 	$res= new reservationC();
 	$res->ajouterreservations($reservation);
+
+	$subject="Réservation à MIMOSAS";
+	$txt="Bonjour,\n\n\nVotre demande de réservation est en cours de traitement.\nMerci de verifier votre liste de reservations pour confirmer votre présence chez nous.Rendez-vous sur : http://localhost/projetWeb/views/index2.php.\n\n\nCordialement,\n\nEquipe MIMOSAS";
+
+
+	mail($v3,$subject,$txt);
 	header('Location: http://localhost/projetWeb/views/index2.php');
 }
 ?>
