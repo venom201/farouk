@@ -211,9 +211,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 											</div>	
 										</a>
 										<ul class="dropdown-menu drp-mnu">
-											<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
-											<li> <a href="#"><i class="fa fa-user"></i> Profile</a> </li> 
-											<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+											<li> <a href="#"><i class="fa fa-cog"></i> Parametre</a> </li> 
+											<li> <a href="#"><i class="fa fa-user"></i> Profil</a> </li> 
+											<li> <a href="../core/disconnect.php"><i class="fa fa-sign-out"></i> Déconnecter</a> </li>
 										</ul>
 									</li>
 								</ul>

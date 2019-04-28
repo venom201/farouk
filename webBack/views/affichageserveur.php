@@ -287,7 +287,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<th>Sexe</th>
 							<th>Tel</th>
 							<th>Salaire</th>
-							<th>Changement d'état</th>
+							<th>Supprimer</th>
+							<th>Modifier</th>
+							
 							
 														
 						  </tr>
@@ -303,8 +305,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								echo'<td>'.$row['tel'].'</td>';
 								echo'<td>'.$row['salaire'].'</td>';								
 								?>
-								<td><a href='../core/supprimerServeurC.php?id=<?php echo$row['id'];?>'>SUPPRIMER</a>
-								<a href='modifierserveur.php?id=<?php echo$row['id'];?>'>MODIFIER</a></td>
+								<td><a href='../core/supprimerServeurC.php?id=<?php echo$row['id'];?>'><i style="color: red;"class="glyphicon glyphicon-trash"></i></a></td>
+								<td><a href='modifierserveur.php?id=<?php echo$row['id'];?>'><i style="color: green;"class="fa fa-pencil-square-o"></i></a></td>
 								<?php
 						  		echo'</tr>';
 						  		# code...

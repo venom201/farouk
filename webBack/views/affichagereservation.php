@@ -16,7 +16,12 @@ else if(isset($_POST['tria']))
 {
 	$liste=$db->query("SELECT * FROM `reservations` ORDER BY `reservations`.`nom` DESC");
 }
-else $liste=$db->query("SELECT * FROM `reservations`");
+else{ $liste=$db->query("SELECT * FROM `reservations`");}
+
+$sth1 = $db->query("SELECT * FROM reservations WHERE statut='en attente' ORDER BY `reservations`.`id` DESC LIMIT 3");
+$sth = $db->query("SELECT * FROM reservations WHERE statut='en attente' ORDER BY `reservations`.`id` DESC");
+
+$count = $sth->rowCount();
 
 
 
@@ -92,12 +97,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="w3layouts-left">
 							
 							<!--search-box-->
+							<div>
+                <script src="../jquery.min.js"></script>
 								<div class="w3-search-box">
-									<form action="#" method="post">
-										<input type="text" placeholder="Recherche..." required="">	
-										<input type="submit" value="">					
-									</form>
+									
+										<input type="text" id="country" placeholder="Recherche..." required=""><i class="glyphicon glyphicon-search"></i>
+											
+										<div id="countryList"></div>				
+									
 								</div><!--//end-search-box-->
+							
+           </div>
+
+
 							<div class="clearfix"> </div>
 						 </div>
 						 <div class="w3layouts-right">
@@ -143,50 +155,37 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</ul>
 									</li>
 									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge blue">3</span></a>
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-bell"></i><span class="badge red"><?php echo $count;?></span></a>
 										<ul class="dropdown-menu">
 											<li>
 												<div class="notification_header">
-													<h3>Vous avez 3 notifications</h3>
+													<h3>Vous avez <?php echo $count; ?> reservations en attente</h3>
 												</div>
 											</li>
-											<li><a href="#">
-												<div class="user_img"><img src="images/in8.jpg" alt=""></div>
+											<?php foreach ($sth1 as $key) {?>
+												<li>
+											
 											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>il y'a 1 heure</span></p>
+												<p><i style="color:#EBC72F;font-size: 17px;" class="glyphicon glyphicon-bell"></i><?php echo " Le client ".$key['nom']." veut reserver ".$key['nombre']." personnes le ".$key['date']." à ".$key['duree'].'<strong> en attente...</strong>'; ?></p>
+												
 												</div>
 											  <div class="clearfix"></div>	
-											 </a></li>
-											 <li class="odd"><a href="#">
-												<div class="user_img"><img src="images/in6.jpg" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>il y'a 1 heure</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											 </a></li>
-											 <li><a href="#">
-												<div class="user_img"><img src="images/in7.jpg" alt=""></div>
-											   <div class="notification_desc">
-												<p>Lorem ipsum dolor</p>
-												<p><span>il y'a 1 heure</span></p>
-												</div>
-											   <div class="clearfix"></div>	
-											 </a></li>
-											 <li>
+											 </li>
+										
+											<?php } ?>
+											
 												<div class="notification_bottom">
-													<a href="#">Voir notifications</a>
+													<a href="affichagereservation.php">Voir Plus..</a>
 												</div> 
 											</li>
 										</ul>
 									</li>	
 									<li class="dropdown head-dpdn">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">9</span></a>
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">0</span></a>
 										<ul class="dropdown-menu">
 											<li>
 												<div class="notification_header">
-													<h3>You have 8 pending task</h3>
+													<h3>You have 0 pending task</h3>
 												</div>
 											</li>
 											<li><a href="#">
@@ -278,7 +277,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					  <h2>Liste des Reservations</h2>
 					    <form method="POST">
 					  	
-					  	<button type="submit" name="tri" class="glyphicon glyphicon-sort-by-alphabet"></button> 
+					  	<button type="submit" name="tri" class="glyphicon glyphicon-sort-by-alphabet"></button>
 					  	<button type="submit" name="tria" class="glyphicon glyphicon-sort-by-alphabet-alt"></button> 
 					  	
 					  	</form>
@@ -311,18 +310,25 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								echo'<td>'.$row['statut'].'</td>';
 															
 								?>
-								<td><a href='../core/supprimerReservationC.php?id=<?php echo$row['id'];?>'>Supprimer</a></td>
+								<td><a href='../core/supprimerReservationC.php?id=<?php echo$row['id'];?>'><i style="color: red;"class="glyphicon glyphicon-trash"></i></a></td>
 								<?php 
 								if($row['statut']=="en attente")
 								{
 									?>
-								<td><a href='refuserreservation.php?id=<?php echo$row['id'];?>'>Refuser</a>/
-								<a href='accepterreservation.php?id=<?php echo$row['id'];?>'>Accepter</a></td>
+								<td><a style="color:red;" href='refuserreservation.php?id=<?php echo$row['id'];?>'>Complet</a>/
+								<a style="color:green;"href='accepterreservation.php?id=<?php echo$row['id'];?>'>Accepter</a></td>
 								<?php
 								}
+								else if($row['statut']=="Accepte"){
 								?>
+								<td><i style="color:green; " class="glyphicon glyphicon-ok"></i></td>
 								<?php
-
+								}
+								else if ($row['statut']=="Complet"){
+									?>
+								<td><i style="color:red; " class="glyphicon glyphicon-remove"></i></td>
+									<?php 
+								}
 						  		echo'</tr>';
 						  		# code...
 							}
@@ -418,6 +424,29 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--js -->
 <script src="js/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
+<script> 
+ {
+ $(document).ready(function(){  
+      $('#country').keyup(function(){  
+           var query = $(this).val(); 
+          if(query != '') 
+            { 
+                $.ajax({  
+                     url:"../core/rechercheC.php",  
+                     method:"POST",  
+                     data:{query:query},  
+                     success:function(data)  
+                     {  
+                          $('#countryList').fadeIn();  
+                          $('#countryList').html(data);  
+                     }  
+                }); 
+
+       } 
+      }); 
+ });}
+
+ </script>
 <!-- Bootstrap Core JavaScript -->
    <script src="js/bootstrap.min.js"></script>
    <!-- /Bootstrap Core JavaScript -->	   
